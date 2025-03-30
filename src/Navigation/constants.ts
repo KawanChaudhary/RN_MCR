@@ -1,5 +1,5 @@
 import Home from '../components/Home';
-import {InfiniteScroll, ListWithHeader, ModalShow} from '../screen';
+import {InfiniteScroll, ListWithHeader, ModalShow, MultiScreen} from '../screen';
 
 export const DRAWER_NAV = [
     {
@@ -21,5 +21,10 @@ export const DRAWER_NAV = [
         id: "4",
         name: "Show Modal",
         component: ModalShow
+    },
+    {
+        id: "5",
+        name: "Multi Screen Stack",
+        component: MultiScreen
     },
 ]
