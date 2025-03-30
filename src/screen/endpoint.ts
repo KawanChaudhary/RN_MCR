@@ -1,0 +1,1 @@
+export const FETCH_PRODUCTS = 'https://dummyjson.com/products?limit=1000&select=title,price'
