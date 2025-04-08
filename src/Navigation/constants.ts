@@ -7,6 +7,7 @@ import {
 } from '../screen';
 import Carousel from '../screen/Carousel/Carousel';
 import TodoApp from '../screen/ReduxSetup/TodoApp';
+import TodoAppReduxToolKit from '../screen/ReduxToolkit/TodoApp';
 
 export const DRAWER_NAV = [
   {
@@ -43,5 +44,10 @@ export const DRAWER_NAV = [
     id: '7',
     name: 'Todo with Redux',
     component: TodoApp,
+  },
+  {
+    id: '8',
+    name: 'Todo with Redux Toolkit',
+    component: TodoAppReduxToolKit,
   },
 ];
