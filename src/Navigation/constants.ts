@@ -4,10 +4,11 @@ import {
   ListWithHeader,
   ModalShow,
   MultiScreen,
+  Carousel,
+  TodoApp,
+  TodoAppReduxToolKit,
+  RegisterForm
 } from '../screen';
-import Carousel from '../screen/Carousel/Carousel';
-import TodoApp from '../screen/ReduxSetup/TodoApp';
-import TodoAppReduxToolKit from '../screen/ReduxToolkit/TodoApp';
 
 export const DRAWER_NAV = [
   {
@@ -49,5 +50,10 @@ export const DRAWER_NAV = [
     id: '8',
     name: 'Todo with Redux Toolkit',
     component: TodoAppReduxToolKit,
+  },
+  {
+    id: '9',
+    name: 'Register Form',
+    component: RegisterForm,
   },
 ];
