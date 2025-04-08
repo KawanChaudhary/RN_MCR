@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 import React, {useEffect, useState, useCallback} from 'react';
-import {FETCH_CATEGORIES} from './endpoint';
+import {FETCH_CATEGORIES} from '../endpoint';
 
 const ListWithHeader = () => {
   const [products, setProducts] = useState([]);

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native'
 import React, { useState } from 'react'
-import ModalReviews from '../components/ModalReviews';
+import ModalReviews from '../../components/ModalReviews';
 
 const ModalShow = () => {
   const [showModal, setShowModal] = useState(false);
