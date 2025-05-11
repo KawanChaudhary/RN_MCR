@@ -1,25 +1,33 @@
-import {FlatList, Image, StyleSheet, View, Dimensions} from 'react-native';
-import React, { useCallback, useRef, useState } from 'react';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  View,
+  Dimensions,
+  Pressable,
+  Text,
+} from 'react-native';
+import React, {useCallback, useRef, useState} from 'react';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
+const slideList = Array.from({length: 10}).map((_, i) => ({
+  id: i,
+  image: `https://picsum.photos/1440/2842?random=${i}`,
+  title: `This is the title! ${i + 1}`,
+  subtitle: `This is the subtitle ${i + 1}!`,
+}));
+
 const Carousel = () => {
-  const slideList = Array.from({length: 10}).map((_, i) => ({
-    id: i,
-    image: `https://picsum.photos/1440/2842?random=${i}`,
-    title: `This is the title! ${i + 1}`,
-    subtitle: `This is the subtitle ${i + 1}!`,
-  }));
-
   const [index, setIndex] = useState(0);
-
+  const flatListRef = useRef(null);
   const indexRef = useRef(index);
 
   indexRef.current = index;
 
-  const onScroll = useCallback((event) => {
+  const onScroll = useCallback(event => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
-    const index = event.nativeEvent.contentOffset.x/slideSize;
+    const index = event.nativeEvent.contentOffset.x / slideSize;
     const roundIndex = Math.round(index);
 
     const distance = Math.abs(roundIndex - index);
@@ -30,11 +38,27 @@ const Carousel = () => {
     if (roundIndex !== indexRef.current && !isNoMansLand) {
       setIndex(roundIndex);
     }
+  }, []);
 
-  }, [])
+  const scrollToIndex = newIndex => {
+    if (newIndex >= 0 && newIndex < slideList.length) {
+      flatListRef?.current?.scrollToIndex({index: newIndex, animated: true});
+      setIndex(newIndex);
+    }
+  };
+
+  const handlePrev = () => {
+    scrollToIndex(index - 1);
+  };
+
+  const handleNext = () => {
+    scrollToIndex(index + 1);
+  };
 
   const Dot = ({idx}) => {
-    return <View style={[styles.dot, idx === index ? styles.colorDot : null]} />;
+    return (
+      <View style={[styles.dot, idx === index ? styles.colorDot : null]} />
+    );
   };
 
   const renderImageItem = ({item}) => {
@@ -48,6 +72,7 @@ const Carousel = () => {
   return (
     <View style={styles.flatlist}>
       <FlatList
+        ref={flatListRef}
         data={slideList}
         keyExtractor={item => item?.id.toString()}
         style={styles.flatlist}
@@ -62,6 +87,24 @@ const Carousel = () => {
         {slideList.map((_, idx) => (
           <Dot key={idx} idx={idx} />
         ))}
+      </View>
+      <View style={styles.btn}>
+        <Pressable
+          style={index === 0 ? styles.disabled : styles.pressable}
+          onPress={handlePrev}
+          disabled={index === 0}>
+          {index > 0 && <Text style={styles.pressableText}>Prev</Text>}
+        </Pressable>
+        <Pressable
+          style={
+            index === slideList.length - 1 ? styles.disabled : styles.pressable
+          }
+          onPress={handleNext}
+          disabled={index === slideList.length - 1}>
+          {index < slideList.length - 1 && (
+            <Text style={styles.pressableText}>Next</Text>
+          )}
+        </Pressable>
       </View>
     </View>
   );
@@ -85,8 +128,8 @@ const styles = StyleSheet.create({
   },
   carouselNav: {
     position: 'absolute',
-    alignItems:'center',
-    justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     left: '50%',
     bottom: 50,
     height: 20,
@@ -104,7 +147,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginHorizontal: 4,
   },
-  colorDot:{
-    backgroundColor:'darkred'
-  }
+  colorDot: {
+    backgroundColor: 'darkred',
+  },
+  btn: {
+    flexDirection: 'row',
+    width: '100%',
+    padding: 20,
+    position: 'absolute',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pressable: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 5,
+    borderRadius: 5,
+  },
+  pressableText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  disabled: {
+    display: 'hidden',
+  },
 });
