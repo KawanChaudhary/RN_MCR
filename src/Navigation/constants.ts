@@ -1,4 +1,5 @@
 import Home from '../components/Home';
+import DropdownComponent from '../Dropdown/Dropdown';
 import {
   InfiniteScroll,
   ListWithHeader,
@@ -55,5 +56,10 @@ export const DRAWER_NAV = [
     id: '9',
     name: 'Register Form',
     component: RegisterForm,
+  },
+  {
+    id: '10',
+    name: 'Dropdown',
+    component: DropdownComponent,
   },
 ];
