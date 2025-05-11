@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -96,6 +96,12 @@ const TodoList = () => {
     </View>
   );
 
+  const getItemLayout = useCallback((_, index) => ({
+    length: 50,
+    offset: 50 * index,
+    index,
+  }), []);
+
   return (
     <View style={styles.container}>
       <View style={styles.inputRow}>
@@ -112,6 +118,10 @@ const TodoList = () => {
         data={todos}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        getItemLayout={getItemLayout}
       />
     </View>
   );
