@@ -10,21 +10,22 @@ import {
   ScrollView,
 } from 'react-native';
 import handleChooseImage from './ImageSelection';
+import InputText from './components/InputText';
 
+const initialState = {
+  name: '',
+  email: '',
+  phone: '',
+  image: null,
+};
 
 export default function RegisterForm() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    image: null,
-  });
-
+  const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     let valid = true;
-    let newErrors = { name: '', email: '', phone: '', image: '' };
+    let newErrors = {name: '', email: '', phone: '', image: ''};
 
     if (!form.name.trim()) {
       newErrors.name = 'Name is required';
@@ -58,9 +59,7 @@ export default function RegisterForm() {
 
   const handleImage = () => {
     handleChooseImage(form, setForm);
-  }
-
-  
+  };
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -76,15 +75,15 @@ export default function RegisterForm() {
     });
 
     try {
-    //   const response = await fetch('https://your-server.com/api/register', {
-    //     method: 'POST',
-    //     body: data,
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //   });
+      //   const response = await fetch('https://your-server.com/api/register', {
+      //     method: 'POST',
+      //     body: data,
+      //     headers: {
+      //       'Content-Type': 'multipart/form-data',
+      //     },
+      //   });
 
-    //   const json = await response.json();
+      //   const json = await response.json();
       Alert.alert('Success', 'User registered successfully!');
       console.log(data);
     } catch (err) {
@@ -95,37 +94,31 @@ export default function RegisterForm() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.label}>Name</Text>
-      <TextInput
-        style={styles.input}
+      <InputText
+        label="Name"
+        error={errors.name}
         value={form.name}
         onChangeText={text => setForm({...form, name: text})}
         placeholder="Enter name"
       />
-      {errors.name ? <Text style={styles.error}>{errors.name}</Text> : null}
-
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        style={styles.input}
+      <InputText
+        label="Email"
+        error={errors.email}
         value={form.email}
         onChangeText={text => setForm({...form, email: text})}
         placeholder="Enter email"
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      {errors.email ? <Text style={styles.error}>{errors.email}</Text> : null}
-
-      <Text style={styles.label}>Phone</Text>
-      <TextInput
-        style={styles.input}
+      <InputText
+        label="Phone"
+        error={errors.phone}
         value={form.phone}
         onChangeText={text => setForm({...form, phone: text})}
         placeholder="Enter phone number"
         keyboardType="number-pad"
         maxLength={10}
       />
-      {errors.phone ? <Text style={styles.error}>{errors.phone}</Text> : null}
-
       <TouchableOpacity style={styles.imageUpload} onPress={handleImage}>
         {form.image ? (
           <Image source={{uri: form.image.uri}} style={styles.image} />
@@ -144,19 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingBottom: 60,
     backgroundColor: '#fff',
-  },
-  label: {
-    fontWeight: '600',
-    marginTop: 10,
-    marginBottom: 4,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 6,
   },
   error: {
     color: 'red',
