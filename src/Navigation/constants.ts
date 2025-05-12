@@ -1,5 +1,4 @@
 import Home from '../components/Home';
-import DropdownComponent from '../Dropdown/Dropdown';
 import {
   InfiniteScroll,
   ListWithHeader,
@@ -8,7 +7,9 @@ import {
   Carousel,
   TodoApp,
   TodoAppReduxToolKit,
-  RegisterForm
+  RegisterForm,
+  Dropdown,
+  OTP
 } from '../screen';
 
 export const DRAWER_NAV = [
@@ -60,6 +61,11 @@ export const DRAWER_NAV = [
   {
     id: '10',
     name: 'Dropdown',
-    component: DropdownComponent,
+    component: Dropdown,
+  },
+  {
+    id: '11',
+    name: 'OTP',
+    component: OTP,
   },
 ];

@@ -6,3 +6,5 @@ export {default as Carousel} from './Carousel/Carousel';
 export {default as TodoApp} from './ReduxSetup/TodoApp';
 export {default as TodoAppReduxToolKit} from './ReduxToolkit/TodoApp';
 export {default as RegisterForm} from './RegisterForm/RegisterForm';
+export {default as Dropdown} from './Dropdown/Dropdown';
+export {default as OTP} from './Otp/OtpScreen';
