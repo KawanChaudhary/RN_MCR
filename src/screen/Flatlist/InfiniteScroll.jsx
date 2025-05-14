@@ -4,6 +4,17 @@ import React, { useCallback, useEffect, useState, useMemo } from 'react';
 const InfiniteScroll = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        let items = Array.from({ length: 20 }, (_, i) => ({
+            id: i,
+            title: `Item Refreshing ${i}`
+        }));
+        setProducts(items);
+        setRefreshing(false);
+    }
 
     useEffect(() => {
         let items = Array.from({ length: 100 }, (_, i) => ({
@@ -57,6 +68,8 @@ const InfiniteScroll = () => {
             onEndReachedThreshold={0.5}
             ListFooterComponent={loading ? <ActivityIndicator size="small" /> : null}
             style={styles.flatlistContainer}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
         />
     );
 };

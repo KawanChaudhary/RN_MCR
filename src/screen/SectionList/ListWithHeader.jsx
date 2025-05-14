@@ -11,6 +11,7 @@ import {FETCH_CATEGORIES} from '../endpoint';
 
 const ListWithHeader = () => {
   const [products, setProducts] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchProductsWithCategories = async categories => {
     try {
@@ -36,6 +37,13 @@ const ListWithHeader = () => {
       .then(data => fetchProductsWithCategories(data))
       .catch(err => console.log(err));
   };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setProducts([]);
+    fetchCategories();
+    setRefreshing(false);
+  }
 
   useEffect(fetchCategories, []);
 
@@ -75,6 +83,8 @@ const ListWithHeader = () => {
       maxToRenderPerBatch={15}
       windowSize={5}
       sectionSeparatorComponent={sectionSeparatorComp}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
     />
   );
 };
