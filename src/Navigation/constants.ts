@@ -9,7 +9,8 @@ import {
   TodoAppReduxToolKit,
   RegisterForm,
   Dropdown,
-  OTP
+  OTP,
+  Comments
 } from '../screen';
 
 export const DRAWER_NAV = [
@@ -67,5 +68,10 @@ export const DRAWER_NAV = [
     id: '11',
     name: 'OTP',
     component: OTP,
+  },
+  {
+    id: '11',
+    name: 'Nested Comments',
+    component: Comments,
   },
 ];
