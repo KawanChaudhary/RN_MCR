@@ -10,7 +10,8 @@ import {
   RegisterForm,
   Dropdown,
   OTP,
-  Comments
+  Comments,
+  Table
 } from '../screen';
 
 export const DRAWER_NAV = [
@@ -73,5 +74,10 @@ export const DRAWER_NAV = [
     id: '11',
     name: 'Nested Comments',
     component: Comments,
+  },
+  {
+    id: '12',
+    name: 'Table',
+    component: Table,
   },
 ];

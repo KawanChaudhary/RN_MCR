@@ -9,3 +9,4 @@ export {default as RegisterForm} from './RegisterForm/RegisterForm';
 export {default as Dropdown} from './Dropdown/Dropdown';
 export {default as OTP} from './Otp/OtpScreen';
 export {default as Comments} from './Comments/Comments';
+export {default as Table} from './Table/Table';
